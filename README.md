@@ -1,1 +1,1 @@
-# DHS-ViG
+# DHS-ViG: Dynamic Hierarchical Selection for Vision GNNs
