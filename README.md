@@ -1,4 +1,4 @@
-# DHS-ViG: Dynamic Hierarchical Selection for Vision GNNs
+# DHS-ViG: Dynamic Hierarchical Selection for Comprehensive and Robust Feature Perception in Vision GNNs
 
 The implementation of DHS-ViG.
 
