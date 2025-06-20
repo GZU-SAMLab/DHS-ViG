@@ -1,4 +1,4 @@
-# DHS-ViG: Dynamic Hierarchical Selection for Comprehensive and Robust Feature Perception in Vision GNNs
+# DHS-ViG: Dynamic Hierarchical Selective Graph for Comprehensive and Robust Feature Perception
 
 The implementation of DHS-ViG, we will release all code after the paper is accepted (object detection & semantic segmentation).
 
