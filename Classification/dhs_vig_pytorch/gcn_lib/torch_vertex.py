@@ -148,12 +148,12 @@ class DyGraphConv2d(GraphConv2d):
         return x.reshape(B, -1, H, W).contiguous()
 
 
-class RoI_Mask_Module(nn.Module):
+class Node_Atten_Module(nn.Module):
     """
-        RoI Mask Module
+        Node attention module
     """
     def __init__(self, dim, num_scales, temperature=1):
-        super(RoI_Mask_Module, self).__init__()
+        super(Node_Atten_Module, self).__init__()
 
         self.temperature = temperature
         self.proj = nn.Sequential(
@@ -220,14 +220,14 @@ class Grapher(nn.Module):
         return x
 
 
-class HSD_Block(nn.Module):
+class HSG_Block(nn.Module):
     """
-        Hierarchical salience distillation (HDS) block
+        Hierarchical selective graph (HSG) block
     """
     def __init__(self, in_channels, kernel_size, dilation=1, conv='edge', act='relu', norm=None,
                  bias=True, stochastic=False, epsilon=0.0, r=1, n=196, drop_path=0.0, relative_pos=False):
-        super(HSD_Block, self).__init__()
-        print('Hierarchical salience distillation (HDS) block, K is ', kernel_size)
+        super(HSG_Block, self).__init__()
+        print('Hierarchical selective graph (HSG) block, K is ', kernel_size)
 
         self.channels = in_channels
         self.n = n
@@ -247,8 +247,8 @@ class HSD_Block(nn.Module):
         self.graph_conv4 = DyGraphConv2d(in_channels, in_channels * 2, kernel_size[3], dilation, conv,
                                          act, norm, bias, stochastic, epsilon, r)
 
-        # RoI Mask Module
-        self.dilation_predictor = RoI_Mask_Module(in_channels, 4)
+        # node attention module
+        self.mask_predictor = Node_Atten_Module(in_channels, 4)
 
         self.fc2 = nn.Sequential(
             nn.Conv2d(in_channels * 2, in_channels, 1, stride=1, padding=0),
@@ -275,7 +275,7 @@ class HSD_Block(nn.Module):
 
     def forward(self, x):
         _tmp = x
-        mask = self.dilation_predictor(x)
+        mask = self.mask_predictor(x)
 
         x = self.fc1(x)
         B, C, H, W = x.shape
