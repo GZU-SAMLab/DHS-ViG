@@ -7,7 +7,7 @@ from timm.data import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
 from timm.models.layers import DropPath
 from timm.models.registry import register_model
 
-from .gcn_lib import act_layer, Grapher, HSD_Block
+from .gcn_lib import act_layer, Grapher, HSG_Block
 
 
 def _cfg(url='', **kwargs):
@@ -107,7 +107,7 @@ class Block(nn.Module):
                                             stochastic=stochastic, epsilon=epsilon, r=reduce_ratios, n=n,
                                             drop_path=drop_path, relative_pos=True)
         elif mode == 'hds':
-            self.GraphProcessFlow = HSD_Block(channel, knn_group, dilation, conv=conv, act=act, norm=norm,
+            self.GraphProcessFlow = HSG_Block(channel, knn_group, dilation, conv=conv, act=act, norm=norm,
                                               bias=bias, stochastic=stochastic, epsilon=epsilon, r=reduce_ratios,
                                               n=n, drop_path=drop_path, relative_pos=True)
         else:
