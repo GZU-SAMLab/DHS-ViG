@@ -150,7 +150,7 @@ class DyGraphConv2d(GraphConv2d):
 
 class Node_Atten_Module(nn.Module):
     """
-        RoI Mask Module
+        Node attention module
     """
     def __init__(self, dim, num_scales, temperature=1):
         super(Node_Atten_Module, self).__init__()
