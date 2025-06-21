@@ -222,12 +222,12 @@ class Grapher(nn.Module):
 
 class HSG_Block(nn.Module):
     """
-        Hierarchical selective graph (HDG) block
+        Hierarchical selective graph (HSG) block
     """
     def __init__(self, in_channels, kernel_size, dilation=1, conv='edge', act='relu', norm=None,
                  bias=True, stochastic=False, epsilon=0.0, r=1, n=196, drop_path=0.0, relative_pos=False):
         super(HSG_Block, self).__init__()
-        print('Hierarchical selective graph (HDG) block, K is ', kernel_size)
+        print('Hierarchical selective graph (HSG) block, K is ', kernel_size)
 
         self.channels = in_channels
         self.n = n
